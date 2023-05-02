@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using User.API;
 
-namespace BulkRetail.CustomerService.Controllers
+namespace User.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -18,7 +19,7 @@ namespace BulkRetail.CustomerService.Controllers
             _logger = logger;
         }
 
-        [HttpGet,Route("GetUsers")]
+        [HttpGet, Route("GetUsers")]
         public IEnumerable<WeatherForecast> GetUsers()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

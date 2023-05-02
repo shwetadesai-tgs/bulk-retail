@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace BulkRetail.PaymentService.Controllers
+namespace Payment.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
