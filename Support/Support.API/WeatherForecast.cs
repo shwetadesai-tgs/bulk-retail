@@ -1,4 +1,4 @@
-namespace BulkRetail.SupportService
+namespace Support.API
 {
     public class WeatherForecast
     {

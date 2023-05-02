@@ -1,25 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace BulkRetail.OrderService.Controllers
+namespace Product.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    [Route("api/[controller]")]
+    public class ProductController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+        };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<ProductController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public ProductController(ILogger<ProductController> logger)
         {
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet,Route("GetProducts")]
+        public IEnumerable<WeatherForecast> GetProducts()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Order.API.Controllers
+namespace BulkRetail.PaymentService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrderController : ControllerBase
+    public class PaymentController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
