@@ -80,7 +80,20 @@
       "UpstreamPathTemplate": "/OcelotGateway/Products",
       "UpstreamHttpMethod": [ "Get" ],
 
-      "DownstreamPathTemplate": "/api/Product/GetProducts",
+      "DownstreamPathTemplate": "/api/Product/GetAllProducts",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/OcelotGateway/AddProduct",
+      "UpstreamHttpMethod": [ "Post" ],
+
+      "DownstreamPathTemplate": "/api/Product/AddNewProduct",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {

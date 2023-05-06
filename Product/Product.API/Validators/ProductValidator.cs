@@ -1,8 +1,9 @@
-﻿using FluentValidation;
+﻿using BulkRetail.ProductService.Models;
+using FluentValidation;
 
 namespace Product.API.Validators
 {
-    public class ProductValidator : AbstractValidator<BulkRetail.ProductService.Models.ProductModel>
+    public class ProductValidator : AbstractValidator<ProductModel>
     {
         public ProductValidator()
         {

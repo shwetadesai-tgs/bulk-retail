@@ -1,5 +1,6 @@
 using BulkRetail.ProductService.Data;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Product.Core.IRepositories;
 using Product.Core.IServices;
@@ -13,28 +14,33 @@ var builder = WebApplication.CreateBuilder(args);
 //Sql Dependency Injection
 var ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(ConnectionString));
-#pragma warning disable CS8603 // Possible null reference return.
-builder.Services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
-#pragma warning restore CS8603 // Possible null reference return.
 
-#pragma warning disable CS0618 // Type or member is obsolete
+builder.Services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+{
+    o.Authority = "https://localhost:44366";
+    o.Audience = "AuthenticationAPI";
+    o.RequireHttpsMetadata = false;
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("PublicSecure", policy => policy.RequireClaim("client_id", "zuber@tgs.com"));
+});
+
 builder.Services.AddControllers()
     .AddFluentValidation(options =>
     {
-        // Validate child properties and root collection elements
-#pragma warning disable CS0618 // Type or member is obsolete
         options.ImplicitlyValidateChildProperties = true;
-#pragma warning restore CS0618 // Type or member is obsolete
-#pragma warning disable CS0618 // Type or member is obsolete
         options.ImplicitlyValidateRootCollectionElements = true;
-#pragma warning restore CS0618 // Type or member is obsolete
-
-        // Automatic registration of validators in assembly
-#pragma warning disable CS0618 // Type or member is obsolete
         options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-#pragma warning restore CS0618 // Type or member is obsolete
     });
-#pragma warning restore CS0618 // Type or member is obsolete
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

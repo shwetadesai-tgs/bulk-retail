@@ -45,6 +45,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotGateway", "OcelotGate
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Support.API", "Support\Support.API\Support.API.csproj", "{D032CBDA-7FC5-4172-8C15-9CB568979A6B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer", "IdentityServer", "{309490AD-604B-4D8C-98D4-2E38608C8761}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.API", "IdentityServer.API\IdentityServer.API.csproj", "{8224F2C8-C1F3-4610-AA44-DB06375C76FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +119,10 @@ Global
 		{D032CBDA-7FC5-4172-8C15-9CB568979A6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D032CBDA-7FC5-4172-8C15-9CB568979A6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D032CBDA-7FC5-4172-8C15-9CB568979A6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8224F2C8-C1F3-4610-AA44-DB06375C76FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8224F2C8-C1F3-4610-AA44-DB06375C76FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8224F2C8-C1F3-4610-AA44-DB06375C76FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8224F2C8-C1F3-4610-AA44-DB06375C76FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -135,6 +143,7 @@ Global
 		{4A5FDC4F-798C-44F6-8842-0B587B28BF13} = {2EFDE9FB-B5AC-4FAA-9BFA-200EF963EAE2}
 		{FD871B14-9E93-4653-A4B4-75B881A36006} = {2EFDE9FB-B5AC-4FAA-9BFA-200EF963EAE2}
 		{D032CBDA-7FC5-4172-8C15-9CB568979A6B} = {2EFDE9FB-B5AC-4FAA-9BFA-200EF963EAE2}
+		{8224F2C8-C1F3-4610-AA44-DB06375C76FF} = {309490AD-604B-4D8C-98D4-2E38608C8761}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {30FFBFAD-9E99-4E65-8D26-0E5529FBF998}
