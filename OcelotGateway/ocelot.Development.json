@@ -90,6 +90,19 @@
       ]
     },
     {
+      "UpstreamPathTemplate": "/OcelotGateway/GetProductById/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+
+      "DownstreamPathTemplate": "/api/Product/GetProductById/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ]
+    },
+    {
       "UpstreamPathTemplate": "/OcelotGateway/AddProduct",
       "UpstreamHttpMethod": [ "Post" ],
 
@@ -100,7 +113,53 @@
           "Host": "localhost",
           "Port": 5003
         }
-      ]
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/OcelotGateway/UpdateProduct",
+      "UpstreamHttpMethod": [ "Put" ],
+
+      "DownstreamPathTemplate": "/api/Product/UpdateProduct",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+      //"AddHeadersToRequest": {
+      //  "claims_name": "Claims[name] > value > |",
+      //  "claims_role": "Claims[role] > value > |"
+      //},
+      //"RouteClaimsRequirements": {
+      //  "Role": "Admin"
+      //}
+    },
+
+    {
+      "UpstreamPathTemplate": "/OcelotGateway/DeleteProduct/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+
+      "DownstreamPathTemplate": "/api/Product/DeleteProduct/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
 
     //Support API

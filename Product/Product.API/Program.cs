@@ -1,6 +1,5 @@
 using BulkRetail.ProductService.Data;
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Product.Core.IRepositories;
 using Product.Core.IServices;
@@ -16,23 +15,6 @@ var ConnectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(ConnectionString));
 
 builder.Services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
-
-
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(o =>
-{
-    o.Authority = "https://localhost:44366";
-    o.Audience = "AuthenticationAPI";
-    o.RequireHttpsMetadata = false;
-});
-
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("PublicSecure", policy => policy.RequireClaim("client_id", "zuber@tgs.com"));
-});
 
 builder.Services.AddControllers()
     .AddFluentValidation(options =>

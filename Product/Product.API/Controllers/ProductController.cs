@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BulkRetail.ProductService.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Product.Core.Domain;
 using Product.Core.IServices;
@@ -43,7 +42,6 @@ namespace BulkRetail.ProductService.Controllers
             return Ok(product);
         }
 
-        [Authorize(Policy = "PublicSecure")]
         [HttpPost]
         [Route("AddNewProduct")]
         public async Task<IActionResult> Create(ProductModel productModel)
