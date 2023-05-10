@@ -1,4 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Order.Core.Helper;
+using Order.Core.IServices;
+using Order.Core.RequestResponseModel;
+using System.Net;
+using static Order.Core.Constants.Enums;
 
 namespace Order.API.Controllers
 {
@@ -6,21 +11,56 @@ namespace Order.API.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        private readonly IOrderService _orderServices;
+        public OrderController(IOrderService orderServices)
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+            _orderServices = orderServices;
+        }
+        [HttpGet, Route("GetAllOrders/{userId}")]
+        public async Task<IActionResult> GetAllOrders(int userId)
+        {
+            var orders = await _orderServices.GetAllOrders(userId);
 
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            return Ok(Summaries);
+            return Ok(orders);
         }
 
+
         [HttpGet("{id}")]
-        public IActionResult Get(string id)
+        public IActionResult GetOrder(int orderId)
         {
-            return Ok(Summaries.ToList());
+            var order = _orderServices.GetOrder(orderId);
+
+            return order != null ? Ok(order) : NotFound();
+        }
+
+        [HttpPost, Route("Add")]
+        public IActionResult AddOrder(OrderRequestModel orderRequestModel)
+        {
+            ResultMessage resultMessage = ResultMessage.Succeess;
+
+            if (orderRequestModel == null)
+            {
+                return BadRequest(new APIResponseModel(null, ResultMessage.InternalServerError.GetStringValue()));
+            }
+
+            resultMessage = _orderServices.Add(orderRequestModel);
+
+            return Ok(new APIResponseModel(null, resultMessage.GetStringValue()));
+        }
+
+        [HttpPut, Route("Update")]
+        public IActionResult UpdateOrder(OrderRequestModel orderRequestModel)
+        {
+            ResultMessage resultMessage = ResultMessage.Succeess;
+
+            if (orderRequestModel == null)
+            {
+                return BadRequest(new APIResponseModel(null, ResultMessage.InternalServerError.GetStringValue()));
+            }
+
+            resultMessage = _orderServices.Update(orderRequestModel);
+
+            return Ok(new APIResponseModel(null, resultMessage.GetStringValue()));
         }
     }
 }
