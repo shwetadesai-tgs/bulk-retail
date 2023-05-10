@@ -1,33 +1,111 @@
+﻿using AutoMapper;
+using BulkRetail.ProductService.Models;
 using Microsoft.AspNetCore.Mvc;
+using Product.Core.Domain;
+using Product.Core.IServices;
 
-namespace Product.API.Controllers
+namespace BulkRetail.ProductService.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class ProductController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private readonly IProductServices _productServices;
+        private readonly IMapper _mapper;
 
-        private readonly ILogger<ProductController> _logger;
-
-        public ProductController(ILogger<ProductController> logger)
+        public ProductController(IProductServices productServices,
+            IMapper mapper)
         {
-            _logger = logger;
+            _productServices = productServices;
+            _mapper = mapper;
         }
 
-        [HttpGet,Route("GetProducts")]
-        public IEnumerable<WeatherForecast> GetProducts()
+        [HttpGet]
+        [Route("GetAllProducts")]
+        public async Task<IActionResult> GetAll()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            var products = await _productServices.GetAllProductsAsync();
+            if (products == null)
+                return NotFound();
+
+            return Ok(products);
+        }
+
+        [HttpGet("GetProductById/{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var product = await _productServices.GetProductByIdAsync(id);
+
+            if (product == null)
+                return NotFound();
+
+            return Ok(product);
+        }
+
+        [HttpPost]
+        [Route("AddNewProduct")]
+        public async Task<IActionResult> Create(ProductModel productModel)
+        {
+            try
             {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+                if (!ModelState.IsValid)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, ModelState);
+                }
+
+                var product = _mapper.Map<ProductDto>(productModel);
+                await _productServices.InsertProductAsync(product);
+                return Ok("Record saved successfully.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpPut]
+        [Route("UpdateProduct")]
+        public async Task<IActionResult> Update(ProductModel productModel)
+        {
+            try
+            {
+                if (productModel == null || productModel.Id == 0)
+                    return BadRequest();
+
+                var product = await _productServices.GetProductByIdAsync(productModel.Id);
+
+                if (product == null)
+                    return NotFound();
+
+                product.Name = productModel.Name;
+                product.IsActive = productModel.IsActive;
+                product.MOQ = productModel.MOQ;
+                product.DiscountValue = productModel.DiscountValue;
+                product.DiscountType = productModel.DiscountType;
+                product.Brand = productModel.Brand;
+                product.LastPrice = productModel.LastPrice;
+                product.CostPrice = productModel.CostPrice;
+                product.MinSalePrice = productModel.MinSalePrice;
+
+                await _productServices.UpdateProductAsync(product);
+                return Ok("Record updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpDelete("DeleteProduct/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var product = await _productServices.GetProductByIdAsync(id);
+
+            if (product == null)
+                return NotFound($"Product Not Found with Id: {id}");
+
+            await _productServices.DeleteProductAsync(product);
+            return Ok($"Product Deleted with Id : {id}");
         }
     }
 }
