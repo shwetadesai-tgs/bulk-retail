@@ -22,12 +22,13 @@ namespace Order.Infrastructure.Services
         public async Task<List<Orders>> GetAllOrders(int userId)
         {
             try
-            {var result = _orderRepositories.Find(x => x.OrderId == userId).ToList();
+            {
+                var result = _orderRepositories.Find(x => x.OrderId == userId).ToList();
                 return result;
             }
             catch (Exception ex)
             {
-
+                Console.Write(ex.ToString());
                 throw;
             }
         }

@@ -29,6 +29,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("PublicSecure", policy => policy.RequireClaim("client_id", "zuber@tgs.com"));
 });
 
+
 //builder.Services.AddAuthorization(options =>
 //{
 //    options.AddPolicy("PublicSecure", policy =>
@@ -46,6 +47,11 @@ builder.Services.AddOcelot(builder.Configuration);
 
 var app = builder.Build();
 
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
 
 app.UseHttpsRedirection();
 

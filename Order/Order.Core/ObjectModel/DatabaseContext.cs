@@ -25,6 +25,22 @@ namespace Order.Core
              .WithOne(e => e.Orders).IsRequired()
              .HasForeignKey(e => e.OrderId);
 
+            modelBuilder.Entity<Orders>()
+                .Property(e => e.OrderPriceIncGST)
+                .HasPrecision(18, 6);
+
+            modelBuilder.Entity<Orders>()
+                .Property(e => e.OrderPriceExGST)
+                .HasPrecision(18, 6);
+
+            modelBuilder.Entity<OrderDetails>()
+                .Property(e => e.NetPrice)
+                .HasPrecision(18, 6);
+
+            modelBuilder.Entity<OrderDetails>()
+                .Property(e => e.Price)
+                .HasPrecision(18, 6);
+
             base.OnModelCreating(modelBuilder);
         }
 
