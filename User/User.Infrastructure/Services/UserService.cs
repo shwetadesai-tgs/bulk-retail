@@ -1,38 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using User.Core.Domain;
+﻿using User.Core.Domain;
+using User.Core.IRepositories;
 using User.Core.IServices;
 
 namespace User.Infrastructure.Services
 {
     public class UserService : IUserService
     {
-        public Task DeleteUserAsync(Users user)
+        private readonly IUserRepository _userRepository;
+
+        public UserService(IUserRepository userRepository)
         {
-            throw new NotImplementedException();
+            _userRepository = userRepository;
         }
 
-        public Task<IList<Users>> GetAllUsersAsync()
+        public async Task DeleteUserAsync(Users user)
         {
-            throw new NotImplementedException();
+            if (user == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+
+            await _userRepository.DeleteUserAsync(user.Id);
         }
 
-        public Task<Users> GetUserByIdAsync(int Id)
+        public async Task<IList<Users>> GetAllUsersAsync()
         {
-            throw new NotImplementedException();
+            return await _userRepository.GetAllUsersAsync();
         }
 
-        public Task InsertUserAsync(Users user)
+        public async Task<Users> GetUserByIdAsync(int Id)
         {
-            throw new NotImplementedException();
+            return await _userRepository.GetUserByIdAsync(Id);
         }
 
-        public Task UpdateUserAsync(Users user)
+        public async Task InsertUserAsync(Users user)
         {
-            throw new NotImplementedException();
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            await _userRepository.InsertUserAsync(user);
+        }
+
+        public async Task UpdateUserAsync(Users user)
+        {
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            await _userRepository.UpdateUserAsync(user);
         }
     }
 }
