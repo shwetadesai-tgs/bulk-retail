@@ -10,6 +10,14 @@ namespace User.Core.IServices
     public interface IUserService
     {
         /// <summary>
+        /// User Authenticate
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        Task<Users> Authenticate(string username, string password);
+
+        /// <summary>
         /// GetAllUsersAsync 
         /// </summary>
         /// <returns></returns>
@@ -27,14 +35,14 @@ namespace User.Core.IServices
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        Task InsertUserAsync(Users user);
+        Task InsertUserAsync(Users user, string password);
 
         /// <summary>
         /// UpdateUser
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        Task UpdateUserAsync(Users user);
+        Task UpdateUserAsync(Users user, string password = null);
 
         /// <summary>
         /// DeleteUser

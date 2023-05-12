@@ -7,6 +7,7 @@ namespace User.Core.IRepositories
         Task<List<Users>> GetAllUsersAsync();
         Task<Users> GetUserByIdAsync(int id);
         Task<List<Users>> GetUserByNameAsync(string name);
+        Task<Users> GetUserByEmailAsync(string email);
         Task InsertUserAsync(Users user);
         Task<bool> UpdateUserAsync(Users user);
         Task<bool> DeleteUserAsync(int id);

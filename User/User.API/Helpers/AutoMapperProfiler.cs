@@ -9,6 +9,8 @@ namespace User.API.Helpers
         public AutoMapperProfiler()
         {
             CreateMap<UserModel, Users>();
+            CreateMap<RegisterModel, Users>();
+            CreateMap<UpdateModel, Users>();
         }
     }
 }
