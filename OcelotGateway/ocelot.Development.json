@@ -187,11 +187,7 @@
           "Host": "localhost",
           "Port": 5003
         }
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      ]
     },
     {
       "UpstreamPathTemplate": "/OcelotGateway/UpdateProduct",
@@ -205,11 +201,7 @@
           "Host": "localhost",
           "Port": 5003
         }
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      ]
       //"AddHeadersToRequest": {
       //  "claims_name": "Claims[name] > value > |",
       //  "claims_role": "Claims[role] > value > |"
@@ -230,11 +222,7 @@
           "Host": "localhost",
           "Port": 5003
         }
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      ]
     },
     //Support API
     {

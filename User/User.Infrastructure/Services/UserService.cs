@@ -22,6 +22,8 @@ namespace User.Infrastructure.Services
                 return null;
 
             var users = await _userRepository.GetUserByEmailAsync(email);
+            if (users == null)
+                return null;
 
             // check if password is correct
             if (!VerifyPasswordHash(password, users.PasswordHash, users.PasswordSalt))
@@ -47,9 +49,9 @@ namespace User.Infrastructure.Services
             if (string.IsNullOrWhiteSpace(password))
                 throw new ArgumentNullException("Password is required");
 
-            var users = await _userRepository.GetAllUsersAsync();
-            if (users.Any(x => x.FirstName == user.FirstName))
-                throw new ArgumentNullException("Name \"" + user.FirstName + "\" is already taken");
+            var users = await _userRepository.GetUserByEmailAsync(user.Email);
+            if (string.Equals(users.Email, user.Email, StringComparison.InvariantCultureIgnoreCase))
+                throw new ArgumentNullException("This email id : " + user.Email + " is already taken by another user");
 
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
