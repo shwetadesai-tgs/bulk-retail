@@ -90,7 +90,7 @@ namespace Order.Infrastructure.Services
                 return resultMessage;
             }
 
-            _cartRepository.Delete(item.Id);
+            _cartRepository.Delete(item);
 
             return resultMessage;
         }
