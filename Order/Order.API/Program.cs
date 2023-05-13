@@ -22,6 +22,8 @@ builder.Services.AddScoped<IOrderDetailServices, OrderDetailService>();
 builder.Services.AddScoped<IOrderRepositories, OrderRepository>();
 builder.Services.AddScoped<IOrderDetailRepositories, OrderDetailRepository>();
 builder.Services.AddScoped<IOrderRepositories, OrderRepository>();
+builder.Services.AddScoped<IShoppingCartRepositories, ShoppingCartRepository>();
+builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
