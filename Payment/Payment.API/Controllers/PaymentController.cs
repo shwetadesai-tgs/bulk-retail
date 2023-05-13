@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace Payment.API.Controllers
 {
@@ -20,6 +22,9 @@ namespace Payment.API.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(string id)
         {
+
+            
+
             return Ok(Summaries.ToList());
         }
     }

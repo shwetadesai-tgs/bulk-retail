@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
-    <PackageReference Include="Stripe.net" Version="41.16.0" />
+    <ProjectReference Include="..\Email.core\Email.core.csproj" />
   </ItemGroup>
 
 </Project>

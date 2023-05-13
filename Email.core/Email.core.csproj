@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
-    <PackageReference Include="Stripe.net" Version="41.16.0" />
+    <PackageReference Include="FluentEmail.Mailgun" Version="3.0.2" />
+    <PackageReference Include="mailgun_csharp" Version="0.7.0" />
+    <PackageReference Include="mailgun_csharp.AspNet.Identity" Version="0.6.0" />
   </ItemGroup>
 
 </Project>
