@@ -34,7 +34,7 @@ namespace User.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("authenticate")]
+        [HttpPost("Authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] AuthenticateModel model)
         {
             var user = await _userService.Authenticate(model.Email, model.Password);
@@ -56,7 +56,7 @@ namespace User.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("register")]
+        [HttpPost,Route("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
             // map model to entity
@@ -123,7 +123,7 @@ namespace User.API.Controllers
         //}
 
         [HttpPut]
-        [Route("UpdateUser")]
+        [Route("UpdateUser/{id}")]
         public async Task<IActionResult> Update(int id, UpdateModel model)
         {
             // map model to entity and set id

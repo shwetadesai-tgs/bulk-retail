@@ -75,8 +75,8 @@ namespace User.Infrastructure.Services
             {
                 // throw error if the new Name is already taken
                 var users = await _userRepository.GetUserByNameAsync(user.FirstName);
-                if (users.Any(x => x.FirstName == user.FirstName))
-                    throw new ArgumentNullException("Name \"" + user.FirstName + "\" is already taken");
+                //if (users.Any(x => x.FirstName == user.FirstName))
+                //    throw new ArgumentNullException("Name \"" + user.FirstName + "\" is already taken");
 
                 user.Email = userParam.Email;
             }
