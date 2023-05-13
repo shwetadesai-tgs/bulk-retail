@@ -3,13 +3,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json.Serialization;
 using User.API.Helpers;
 using User.Core.Domain;
 using User.Core.IServices;
 using User.Core.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace User.API.Controllers
 {
@@ -42,7 +45,7 @@ namespace User.API.Controllers
             if (user == null)
                 return BadRequest(new { message = "Email or password is incorrect" });
 
-            string token = CreateToken(user);
+            string token = await CreateToken(user);
 
             // return basic user info and authentication token
             return Ok(new
@@ -167,22 +170,38 @@ namespace User.API.Controllers
         }
 
         #region CreateToken
-        private string CreateToken(Users user)
+        private async Task<string> CreateToken(Users user)
         {
-            List<Claim> claims = new List<Claim>
+            var http=new HttpClient();
+            var reqData = new[]
             {
-                new Claim(ClaimTypes.Email,user.Email)
+                new KeyValuePair<string,string>("grant_type",_configuration["IdentityServer:grant_type"]),
+                new KeyValuePair<string,string>("Scope",_configuration["IdentityServer:Scope"]),
+                new KeyValuePair<string,string>("client_id",_configuration["IdentityServer:client_id"]),
+                new KeyValuePair<string,string>("client_secret",_configuration["IdentityServer:client_secret"]),
             };
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.Secret));
+            var res= await http.PostAsync(_configuration["IdentityServer:Url"], new FormUrlEncodedContent(reqData));
+            var jwt = "";
+            if(res.IsSuccessStatusCode)
+            {
+                var tokenData= await res.Content.ReadAsStringAsync();
+                var resData = JsonConvert.DeserializeObject<AuthToken>(tokenData);
+                jwt = resData?.Access_token;
+            }
+            //List<Claim> claims = new List<Claim>
+            //{
+            //    new Claim(ClaimTypes.Email,user.Email)
+            //};
+            //var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.Secret));
 
-            var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            //var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-            var token = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.Now.AddSeconds(3600),
-                signingCredentials: cred);
+            //var token = new JwtSecurityToken(
+            //    claims: claims,
+            //    expires: DateTime.Now.AddSeconds(3600),
+            //    signingCredentials: cred);
 
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+            //var jwt = new JwtSecurityTokenHandler().WriteToken(token);
             return jwt;
         }
 
