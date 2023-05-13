@@ -1,27 +1,32 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using Support.Core.IServices;
+using AutoMapper;
 namespace Support.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class SupportController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        private readonly ISupportServices _supportService;
+        private readonly IMapper _mapper;
+        public SupportController(ISupportServices supportServices,
+            IMapper mapper)
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+            _supportService = supportServices;
+            _mapper = mapper;
+        }
 
         [HttpGet]
-        public IActionResult GetAll()
+        [Route("GetAllSupports")]
+        public async Task<IActionResult> GetAll()
         {
-            return Ok(Summaries);
+            var supports = await _supportService.GetAllSupportsAsync();
+            if (supports == null)
+                return NotFound();
+
+            return Ok(supports);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(string id)
-        {
-            return Ok(Summaries.ToList());
-        }
     }
 }

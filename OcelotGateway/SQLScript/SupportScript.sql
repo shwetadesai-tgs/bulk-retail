@@ -8,7 +8,7 @@ CONSTRAINT [PK_Products] PRIMARY KEY CLUSTERED
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-CREATE TABLE [dbo].[Support](
+CREATE TABLE [dbo].[Supports](
 	[SupportId] [int] IDENTITY(1,1) NOT NULL,
 	[SupportCategoryId] [bigint] NOT NULL,
 	[Name] [nvarchar](max) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE [dbo].[Support](
 	[Description] [nvarchar](max) NOT NULL,
 	[Email] [nvarchar](100) NOT NULL,
 	[Status] [int] NULL
-CONSTRAINT [PK_Support] PRIMARY KEY CLUSTERED 
+CONSTRAINT [PK_Supports] PRIMARY KEY CLUSTERED 
 (
 	[SupportId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
