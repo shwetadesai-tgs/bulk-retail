@@ -22,6 +22,8 @@ namespace User.Infrastructure.Services
                 return null;
 
             var users = await _userRepository.GetUserByEmailAsync(email);
+            if (users == null)
+                return null;
 
             // check if password is correct
             if (!VerifyPasswordHash(password, users.PasswordHash, users.PasswordSalt))
