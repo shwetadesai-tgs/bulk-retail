@@ -11,6 +11,7 @@ namespace Order.Core
         }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+        public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

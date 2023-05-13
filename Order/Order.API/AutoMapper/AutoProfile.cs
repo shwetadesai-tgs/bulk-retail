@@ -9,6 +9,7 @@ namespace Order.API.AutoMapper
         public AutoProfile() 
         {
             CreateMap<OrderRequestModel, Orders>();
+            CreateMap<CartRequestModel, ShoppingCart>();
         }
     }
 }

@@ -52,5 +52,6 @@ namespace Order.Infrastructure.Repositories
             entry.State = EntityState.Deleted;
             return 0;
         }
+
     }
 }
