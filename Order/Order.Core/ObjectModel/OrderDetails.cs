@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 namespace Order.Core.ObjectModel
 {
     [DataContract]
-    [Table("OrderDetails")]
     public class OrderDetails
     {
         [Key]
