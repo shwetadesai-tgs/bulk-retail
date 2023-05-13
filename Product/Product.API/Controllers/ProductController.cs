@@ -31,7 +31,7 @@ namespace BulkRetail.ProductService.Controllers
             return Ok(products);
         }
 
-        [HttpGet("GetProductById/{id}")]
+        [HttpGet,Route("GetProductById/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var product = await _productServices.GetProductByIdAsync(id);

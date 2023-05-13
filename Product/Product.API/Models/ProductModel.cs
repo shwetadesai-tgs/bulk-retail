@@ -1,4 +1,6 @@
-﻿namespace BulkRetail.ProductService.Models
+﻿using Newtonsoft.Json;
+
+namespace BulkRetail.ProductService.Models
 {
     public class ProductModel
     {

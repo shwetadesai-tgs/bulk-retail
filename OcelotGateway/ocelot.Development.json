@@ -187,11 +187,7 @@
           "Host": "localhost",
           "Port": 5003
         }
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      ]
     },
     {
       "UpstreamPathTemplate": "/OcelotGateway/UpdateProduct",
@@ -205,11 +201,7 @@
           "Host": "localhost",
           "Port": 5003
         }
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      ]
       //"AddHeadersToRequest": {
       //  "claims_name": "Claims[name] > value > |",
       //  "claims_role": "Claims[role] > value > |"
@@ -230,11 +222,7 @@
           "Host": "localhost",
           "Port": 5003
         }
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      ]
     },
     //Support API
     {
@@ -253,11 +241,76 @@
     },
     ////Users API
     {
+      "UpstreamPathTemplate": "/OcelotGateway/Authenticate",
+      "UpstreamHttpMethod": [ "Post" ],
+
+      "DownstreamPathTemplate": "/api/User/Authenticate",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/OcelotGateway/Register",
+      "UpstreamHttpMethod": [ "Post" ],
+
+      "DownstreamPathTemplate": "/api/User/Register",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ]
+    },
+    {
       "UpstreamPathTemplate": "/OcelotGateway/Users",
       "UpstreamHttpMethod": [
         "GET"
       ],
       "DownstreamPathTemplate": "/api/User/GetUsers",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/OcelotGateway/GetUserById/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+
+      "DownstreamPathTemplate": "/api/User/GetUserById/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/OcelotGateway/UpdateUser/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+
+      "DownstreamPathTemplate": "/api/User/UpdateUser/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/OcelotGateway/DeleteUser/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+
+      "DownstreamPathTemplate": "/api/User/DeleteUser/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
