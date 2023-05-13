@@ -57,10 +57,12 @@ namespace Order.API.Controllers
             {
                 return BadRequest(new APIResponseModel(null, ResultMessage.InternalServerError.GetStringValue()));
             }
-
-            resultMessage = _orderServices.Update(orderRequestModel);
-
             return Ok(new APIResponseModel(null, resultMessage.GetStringValue()));
+        }
+        [HttpGet, Route("OrderStatus/{id}")]
+        public IActionResult OrḍerStatus(int id)
+        {
+            return Ok(_orderServices.GetOrder(id).OrderStatus);
         }
     }
 }

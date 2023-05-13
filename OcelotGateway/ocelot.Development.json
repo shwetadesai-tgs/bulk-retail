@@ -31,6 +31,19 @@
         }
       ]
     },
+    {
+      "UpstreamPathTemplate": "/OcelotGateway/OrderStatus/{Id}",
+      "UpstreamHttpMethod": [ "Get" ],
+
+      "DownstreamPathTemplate": "/api/order/OrderStatus/{Id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ]
+    },
 
 
     ////Payment API
