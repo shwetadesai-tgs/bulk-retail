@@ -17,9 +17,9 @@ namespace Order.API.Controllers
             _orderServices = orderServices;
         }
         [HttpGet, Route("GetAllOrders/{userId}")]
-        public async Task<IActionResult> GetAllOrders(int userId)
+        public IActionResult GetAllOrders(int userId)
         {
-            var orders = await _orderServices.GetAllOrders(userId);
+            var orders = _orderServices.GetAllOrders(userId).Result;
 
             return Ok(orders);
         }
@@ -33,7 +33,7 @@ namespace Order.API.Controllers
             return order != null ? Ok(order) : NotFound();
         }
 
-        [HttpPost, Route("Add")]
+        [HttpPost, Route("AddOrder")]
         public IActionResult AddOrder(OrderRequestModel orderRequestModel)
         {
             ResultMessage resultMessage = ResultMessage.Succeess;
@@ -48,7 +48,7 @@ namespace Order.API.Controllers
             return Ok(new APIResponseModel(null, resultMessage.GetStringValue()));
         }
 
-        [HttpPut, Route("Update")]
+        [HttpPut, Route("UpdateOrder")]
         public IActionResult UpdateOrder(OrderRequestModel orderRequestModel)
         {
             ResultMessage resultMessage = ResultMessage.Succeess;
@@ -63,6 +63,20 @@ namespace Order.API.Controllers
         public IActionResult OrḍerStatus(int id)
         {
             return Ok(_orderServices.GetOrder(id).OrderStatus);
+        }
+        [HttpDelete, Route("DeleteOrder")]
+        public IActionResult DeleteOrder(int orderId)
+        {
+            ResultMessage resultMessage = ResultMessage.Succeess;
+
+            if (orderId == 0)
+            {
+                return BadRequest(new APIResponseModel(null, ResultMessage.InternalServerError.GetStringValue()));
+            }
+
+            resultMessage = _orderServices.Delete(orderId);
+
+            return Ok(new APIResponseModel(null, resultMessage.GetStringValue()));
         }
     }
 }

@@ -20,10 +20,10 @@ namespace Order.Core
             //    .HasForeignKey(x => x.OrderId);
             //modelBuilder.Entity<OrderDetails>().HasNoKey();
 
-            modelBuilder.Entity<Orders>()
-             .HasMany(e => e.OrderDetails)
-             .WithOne(e => e.Orders).IsRequired()
-             .HasForeignKey(e => e.OrderId);
+            //modelBuilder.Entity<Orders>()
+            // .HasMany(e => e.OrderDetails)
+            // .WithOne(e => e.Orders).IsRequired()
+            // .HasForeignKey(e => e.OrderId);
 
             modelBuilder.Entity<Orders>()
                 .Property(e => e.OrderPriceIncGST)

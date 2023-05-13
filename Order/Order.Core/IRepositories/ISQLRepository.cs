@@ -8,6 +8,7 @@ namespace Order.Core.IRepositories
         IQueryable<T> All();
         IQueryable<T> Find(Expression<Func<T, bool>> predicate);
         EntityEntry<T> Create(T T);
+        int Delete(T T);
         int Update(T T);
     }
 }

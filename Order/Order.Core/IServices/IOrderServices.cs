@@ -10,5 +10,6 @@ namespace Order.Core.IServices
         Orders GetOrder(int orderId);
         ResultMessage Update(OrderRequestModel orderRequestModel);
         ResultMessage Add(OrderRequestModel orderRequestModel);
+        ResultMessage Delete(int orderId);
     }
 }

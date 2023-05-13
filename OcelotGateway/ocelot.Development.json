@@ -1,14 +1,28 @@
 {
-    "GlobalConfiguration":{
-      "BaseUrl": "http://localhost:5111"
-    },
-
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5111"
+  },
   "Routes": [
     //Order API
     {
+      "UpstreamPathTemplate": "/OcelotGateway/GetAllOrders/{userId}",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Order/GetAllOrders/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ]
+    },
+    {
       "UpstreamPathTemplate": "/OcelotGateway/Orders",
-      "UpstreamHttpMethod": [ "Get" ],
-
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
       "DownstreamPathTemplate": "/api/Order",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -20,8 +34,9 @@
     },
     {
       "UpstreamPathTemplate": "/OcelotGateway/Orders/{Id}",
-      "UpstreamHttpMethod": [ "Get" ],
-
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
       "DownstreamPathTemplate": "/api/Order/{Id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -33,8 +48,9 @@
     },
     {
       "UpstreamPathTemplate": "/OcelotGateway/OrderStatus/{Id}",
-      "UpstreamHttpMethod": [ "Get" ],
-
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
       "DownstreamPathTemplate": "/api/order/OrderStatus/{Id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -44,14 +60,54 @@
         }
       ]
     },
-
-
+    {
+      "UpstreamPathTemplate": "/OcelotGateway/AddOrder",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Order/AddOrder",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/OcelotGateway/UpdateOrder",
+      "UpstreamHttpMethod": [
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/api/Order/UpdateOrder",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/OcelotGateway/DeleteOrder/{orderId}",
+      "UpstreamHttpMethod": [
+        "Delete"
+      ],
+      "DownstreamPathTemplate": "/api/Order/{orderId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ]
+    },
     ////Payment API
-
     {
       "UpstreamPathTemplate": "/OcelotGateway/Payments",
-      "UpstreamHttpMethod": [ "Get" ],
-
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
       "DownstreamPathTemplate": "/api/Payment",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -63,8 +119,10 @@
     },
     {
       "UpstreamPathTemplate": "/OcelotGateway/Payments/{id}",
-      "UpstreamHttpMethod": [ "GET", "DELETE" ],
-
+      "UpstreamHttpMethod": [
+        "GET",
+        "DELETE"
+      ],
       "DownstreamPathTemplate": "/api/Payment/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -76,8 +134,9 @@
     },
     {
       "UpstreamPathTemplate": "/OcelotGateway/Payments",
-      "UpstreamHttpMethod": [ "POST" ],
-
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
       "DownstreamPathTemplate": "/api/Payment",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -87,12 +146,12 @@
         }
       ]
     },
-
     ////Product API
     {
       "UpstreamPathTemplate": "/OcelotGateway/Products",
-      "UpstreamHttpMethod": [ "Get" ],
-
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
       "DownstreamPathTemplate": "/api/Product/GetAllProducts",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -104,8 +163,9 @@
     },
     {
       "UpstreamPathTemplate": "/OcelotGateway/GetProductById/{id}",
-      "UpstreamHttpMethod": [ "Get" ],
-
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
       "DownstreamPathTemplate": "/api/Product/GetProductById/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -117,8 +177,9 @@
     },
     {
       "UpstreamPathTemplate": "/OcelotGateway/AddProduct",
-      "UpstreamHttpMethod": [ "Post" ],
-
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
       "DownstreamPathTemplate": "/api/Product/AddNewProduct",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -134,8 +195,9 @@
     },
     {
       "UpstreamPathTemplate": "/OcelotGateway/UpdateProduct",
-      "UpstreamHttpMethod": [ "Put" ],
-
+      "UpstreamHttpMethod": [
+        "Put"
+      ],
       "DownstreamPathTemplate": "/api/Product/UpdateProduct",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -156,11 +218,11 @@
       //  "Role": "Admin"
       //}
     },
-
     {
       "UpstreamPathTemplate": "/OcelotGateway/DeleteProduct/{id}",
-      "UpstreamHttpMethod": [ "Delete" ],
-
+      "UpstreamHttpMethod": [
+        "Delete"
+      ],
       "DownstreamPathTemplate": "/api/Product/DeleteProduct/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -174,12 +236,12 @@
         "AllowedScopes": []
       }
     },
-
     //Support API
     {
       "UpstreamPathTemplate": "/OcelotGateway/Supports",
-      "UpstreamHttpMethod": [ "Get" ],
-
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
       "DownstreamPathTemplate": "/api/Support",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -189,12 +251,12 @@
         }
       ]
     },
-
     ////Users API
     {
       "UpstreamPathTemplate": "/OcelotGateway/Users",
-      "UpstreamHttpMethod": [ "GET" ],
-
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
       "DownstreamPathTemplate": "/api/User/GetUsers",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [

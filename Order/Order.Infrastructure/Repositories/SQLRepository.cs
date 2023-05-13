@@ -44,5 +44,13 @@ namespace Order.Infrastructure.Repositories
             entry.State = EntityState.Modified;
             return 0;
         }
+
+        public virtual int Delete(T T)
+        {
+            var entry = databaseContext.Entry(T);
+            DbSet.Remove(T);
+            entry.State = EntityState.Deleted;
+            return 0;
+        }
     }
 }

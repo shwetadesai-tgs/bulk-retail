@@ -10,11 +10,13 @@ namespace Order.Infrastructure.Services
     public class OrderService : IOrderService
     {
         private readonly IOrderRepositories _orderRepositories;
+        private readonly IOrderDetailServices _orderDetailServices;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        public OrderService(IOrderRepositories orderRepositories,IMapper mapper,IUnitOfWork unitOfWork)
+        public OrderService(IOrderRepositories orderRepositories,IOrderDetailServices orderDetailServices,IMapper mapper,IUnitOfWork unitOfWork)
         {
             _orderRepositories = orderRepositories;
+            _orderDetailServices = orderDetailServices;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
@@ -22,7 +24,27 @@ namespace Order.Infrastructure.Services
         public async Task<List<Orders>> GetAllOrders(int userId)
         {
             try
-            {
+            {   
+                //var orders = _orderRepositories.Find(x => x.OrderId == userId).ToList();
+                //var orderDetails = _orderDetailServices.GetAllOrders(userId).Result;
+
+                //var result = (from obj in orders
+                //              //join orderDes in orderDetails on obj.OrderId equals orderDes.OrderId
+                //              select new Orders()
+                //              {
+                //                  OrderId = obj.OrderId,
+                //                  CustomerId = obj.CustomerId,
+                //                  Discount = obj.Discount,
+                //                  IsDeleted = obj.IsDeleted,
+                //                  OrderNumber = obj.OrderNumber,
+                //                  OrderPriceExGST=obj.OrderPriceExGST,
+                //                  OrderStatus = obj.OrderStatus,
+                //                  OrderPriceIncGST  =obj.OrderPriceIncGST,
+                //                  PaymentModeId = obj.PaymentModeId,
+                //                  PaymentTransId = obj.PaymentTransId,
+                //                  OrderDetails = orderDetails.Where(x=>x.OrderId == userId).ToList(),
+                //              }).ToList();
+
                 var result = _orderRepositories.Find(x => x.OrderId == userId).ToList();
                 return result;
             }
@@ -82,6 +104,24 @@ namespace Order.Infrastructure.Services
             {
                 throw;
             }
+        }
+
+        public ResultMessage Delete(int orderId)
+        {
+            ResultMessage resultMessage = ResultMessage.Succeess;
+
+            var orders = _orderRepositories.Find(x => x.OrderId == orderId).FirstOrDefault();
+
+            if (orders == null)
+            {
+                resultMessage = ResultMessage.RecorNotFound;
+
+                return resultMessage;
+            }
+
+            _orderRepositories.Delete(orders);
+
+            return resultMessage;
         }
     }
 }
