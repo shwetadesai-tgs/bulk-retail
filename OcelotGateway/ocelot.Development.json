@@ -59,7 +59,7 @@
     },
     {
       "UpstreamPathTemplate": "/OcelotGateway/UpdateOrder",
-      "UpstreamHttpMethod": [ "Post" ],
+      "UpstreamHttpMethod": [ "Put" ],
 
       "DownstreamPathTemplate": "/api/Order/UpdateOrder",
       "DownstreamScheme": "http",
@@ -71,7 +71,7 @@
       ]
     },
     {
-      "UpstreamPathTemplate": "/OcelotGateway/{orderId}",
+      "UpstreamPathTemplate": "/OcelotGateway/DeleteOrder/{orderId}",
       "UpstreamHttpMethod": [ "Delete" ],
 
       "DownstreamPathTemplate": "/api/Order/{orderId}",
